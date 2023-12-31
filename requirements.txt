@@ -1,3 +1,14 @@
 gradio~=4.11.0
 gtts~=2.5.0
 numpy~=1.26.1
+yaml~=0.2.5
+pyyaml~=6.0.1
+torch~=2.1.0
+scipy~=1.10.1
+cn2an~=0.5.22
+pypinyin~=0.50.0
+jieba~=0.42.1
+pyopenjtalk
+jaconv
+g2p_en
+attentions

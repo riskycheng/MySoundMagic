@@ -1,0 +1,74 @@
+bert_gen:
+  config_path: config.json
+  device: cuda
+  num_processes: 2
+  use_multi_device: false
+dataset_path: D:\DataSets\Audio_Clone\Vo_Jay
+mirror: ''
+openi_token: ''
+preprocess_text:
+  clean: true
+  cleaned_path: ''
+  config_path: config.json
+  max_val_total: 8
+  train_path: filelists/train.list
+  transcription_path: filelists/你的数据集文本.list
+  val_path: filelists/val.list
+  val_per_spk: 5
+resample:
+  in_dir: D:\DataSets\Audio_Clone\Vo_Jay
+  out_dir: D:\DataSets\Audio_Clone\Vo_Jay
+  sampling_rate: 44100
+server:
+  device: cuda
+  models:
+  - config: ''
+    device: cuda
+    language: ZH
+    model: ''
+    speakers:
+    - length_scale: 1
+      noise_scale: 0.6
+      noise_scale_w: 0.8
+      sdp_ratio: 0.2
+      speaker: 科比
+    - length_scale: 0.5
+      noise_scale: 0.7
+      noise_scale_w: 0.8
+      sdp_ratio: 0.3
+      speaker: 五条悟
+    - length_scale: 1.2
+      noise_scale: 0.6
+      noise_scale_w: 0.8
+      sdp_ratio: 0.2
+      speaker: 安倍晋三
+  - config: ''
+    device: cpu
+    language: JP
+    model: ''
+    speakers: []
+  port: 5000
+train_ms:
+  base:
+    model_image: Bert-VITS2中日英底模-fix
+    repo_id: Stardust_minus/Bert-VITS2
+    use_base_model: false
+  config_path: config.json
+  env:
+    MASTER_ADDR: localhost
+    MASTER_PORT: 10086
+    RANK: 0
+    THE_ENV_VAR_YOU_NEED_TO_USE: '1234567'
+    WORLD_SIZE: 1
+  model: models
+translate:
+  app_key: ''
+  secret_key: ''
+webui:
+  config_path: config.json
+  debug: false
+  device: cuda
+  language_identification_library: langid
+  model: models\G_37000.pth
+  port: 7860
+  share: false
