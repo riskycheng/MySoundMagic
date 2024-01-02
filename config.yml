@@ -3,7 +3,7 @@ bert_gen:
   device: cuda
   num_processes: 2
   use_multi_device: false
-dataset_path: D:\DataSets\Audio_Clone\Vo_Jay
+dataset_path: ./
 mirror: ''
 openi_token: ''
 preprocess_text:
@@ -16,8 +16,8 @@ preprocess_text:
   val_path: filelists/val.list
   val_per_spk: 5
 resample:
-  in_dir: D:\DataSets\Audio_Clone\Vo_Jay
-  out_dir: D:\DataSets\Audio_Clone\Vo_Jay
+  in_dir: ./
+  out_dir: ./
   sampling_rate: 44100
 server:
   device: cuda
@@ -69,6 +69,6 @@ webui:
   debug: false
   device: cuda
   language_identification_library: langid
-  model: models\G_37000.pth
+  model: models\models_bert_vits2\jay\G_37000.pth
   port: 7860
   share: false
