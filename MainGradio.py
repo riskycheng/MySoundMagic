@@ -65,4 +65,4 @@ with gr.Blocks() as demo:
 
     button_vc_clone.click(flip_text, inputs=vc_audio_input, outputs=vc_audio_output)
 
-demo.launch()
+demo.launch(share=True)

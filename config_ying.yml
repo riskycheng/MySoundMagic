@@ -69,6 +69,6 @@ webui:
   debug: false
   device: cuda
   language_identification_library: langid
-  model: models\models_bert_vits2\ying\G_39000.pth
+  model: models\models_bert_vits2\jay\G_37000.pth
   port: 7860
   share: false
