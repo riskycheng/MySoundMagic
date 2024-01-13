@@ -1,6 +1,6 @@
 import re
 import os
-
+import yaml
 
 def split_long_sentences(long_sentences):
     # Define common symbols for splitting
@@ -56,6 +56,21 @@ def refreshAvailableRolesList():
         results["VITS"][roleName] = {'D_model': os.path.join(model_vits_folders, item, targetModel)}
 
     return results
+
+
+def updateModelSelectionInConfigYaml(selectedModelFilePath, models):
+    print('updateModelSelectionInConfigYaml:', selectedModelFilePath)
+    print('models:', models[selectedModelFilePath])
+    # Load the YAML configuration file
+    with open('config.yml', 'r', encoding='utf-8') as file:
+        config = yaml.safe_load(file)
+
+    # Update the 'model' field with the new path or value
+    config['webui']['model'] = models[selectedModelFilePath]
+
+    # Save the updated configuration back to the file
+    with open('config.yml', 'w', encoding='utf-8') as file:
+        yaml.dump(config, file, default_flow_style=False)
 
 
 if "__main__" == __name__:

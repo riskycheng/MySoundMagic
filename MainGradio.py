@@ -15,7 +15,8 @@ models = {}
 
 def refresh_models_bert_vits2_list():
     models_dic = MyUtils.refreshAvailableRolesList()
-
+    models.clear()
+    roles.clear()
     # Access information for all roles in BERT_VITS2
     bert_vits2_roles = models_dic.get("BERT_VITS2", {})
     for role, details in bert_vits2_roles.items():
@@ -24,6 +25,10 @@ def refresh_models_bert_vits2_list():
         roles.append(role)
         models[role] = d_model_path
     return gr.Dropdown(choices=roles)
+
+
+def refresh_models_bert_vits2_config_yml(selectedModelPath):
+    MyUtils.updateModelSelectionInConfigYaml(selectedModelPath, models)
 
 
 def flip_text(input_text):
@@ -74,13 +79,15 @@ with gr.Blocks() as demo:
                         allow_custom_value=True,
                     )
                     button_refresh_model_list = gr.Button("Refresh")
-                    button_select_model = gr.Button("Confirm")
+                    button_confirm_select_model = gr.Button("Confirm")
                 text_input_prompt_cvt = gr.Textbox(label="Text prompt", lines=8)
                 text_output_cvt = gr.Textbox(label="Output audio")
                 audio_output_cvt = gr.Audio(label="output audio")
                 button_convert = gr.Button("Convert")
 
     button_refresh_model_list.click(refresh_models_bert_vits2_list, inputs=[], outputs=[dropdown_infer_model])
+
+    button_confirm_select_model.click(refresh_models_bert_vits2_config_yml, inputs=[dropdown_infer_model], outputs=[])
 
     button_convert.click(ttsEngine.tts_fn, inputs=[
         text_input_prompt_cvt,
@@ -95,7 +102,7 @@ with gr.Blocks() as demo:
 
     button_vc_clone.click(flip_text, inputs=vc_audio_input, outputs=vc_audio_output)
 
-demo.launch(share=True)
+demo.launch(share=False)
 # if "__main__" == __name__:
 #     print("Start Gradio server...")
 #     refresh_models_bert_vits2_list()
