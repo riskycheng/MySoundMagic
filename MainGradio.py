@@ -13,6 +13,10 @@ roles = []
 models = {}
 
 
+def load_model():
+    ttsEngine.init()
+
+
 def refresh_models_bert_vits2_list():
     models_dic = MyUtils.refreshAvailableRolesList()
     models.clear()
@@ -20,8 +24,8 @@ def refresh_models_bert_vits2_list():
     # Access information for all roles in BERT_VITS2
     bert_vits2_roles = models_dic.get("BERT_VITS2", {})
     for role, details in bert_vits2_roles.items():
-        d_model_path = details.get("D_model", "N/A")
-        print(f"{role}'s D_model path:", d_model_path)
+        d_model_path = details.get("G_model", "N/A")
+        print(f"{role}'s G_model path:", d_model_path)
         roles.append(role)
         models[role] = d_model_path
     return gr.Dropdown(choices=roles)
@@ -80,6 +84,7 @@ with gr.Blocks() as demo:
                     )
                     button_refresh_model_list = gr.Button("Refresh")
                     button_confirm_select_model = gr.Button("Confirm")
+                    button_load_model = gr.Button("Load")
                 text_input_prompt_cvt = gr.Textbox(label="Text prompt", lines=8)
                 text_output_cvt = gr.Textbox(label="Output audio")
                 audio_output_cvt = gr.Audio(label="output audio")
@@ -88,6 +93,8 @@ with gr.Blocks() as demo:
     button_refresh_model_list.click(refresh_models_bert_vits2_list, inputs=[], outputs=[dropdown_infer_model])
 
     button_confirm_select_model.click(refresh_models_bert_vits2_config_yml, inputs=[dropdown_infer_model], outputs=[])
+
+    button_load_model.click(load_model, inputs=[], outputs=[])
 
     button_convert.click(ttsEngine.tts_fn, inputs=[
         text_input_prompt_cvt,

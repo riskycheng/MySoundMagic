@@ -39,10 +39,10 @@ def refreshAvailableRolesList():
         models = os.listdir(os.path.join(models_vits2_root_path, item))
         targetModel = None
         for m in models:
-            if m.startswith('D_'):
+            if m.startswith('G_'):
                 targetModel = m
                 break
-        results["BERT_VITS2"][roleName] = {'D_model': os.path.join(models_vits2_root_path, item, targetModel)}
+        results["BERT_VITS2"][roleName] = {'G_model': os.path.join(models_vits2_root_path, item, targetModel)}
 
     results["VITS"] = {}
     for item in model_vits_folders:
@@ -50,10 +50,10 @@ def refreshAvailableRolesList():
         models = os.listdir(os.path.join(model_vits_folders, item))
         targetModel = None
         for m in models:
-            if m.startswith('D_'):
+            if m.startswith('G_'):
                 targetModel = m
                 break
-        results["VITS"][roleName] = {'D_model': os.path.join(model_vits_folders, item, targetModel)}
+        results["VITS"][roleName] = {'G_model': os.path.join(model_vits_folders, item, targetModel)}
 
     return results
 

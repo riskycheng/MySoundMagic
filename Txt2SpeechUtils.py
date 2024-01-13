@@ -8,11 +8,17 @@ from infer import infer, latest_version, get_net_g
 import gradio as gr
 import webbrowser
 import numpy as np
-from config import config
+from config import updateConfig
 
 
 class Txt2SpeechUtils:
     def __init__(self):
+        self.hps = None
+        self.device = None
+        self.net_g = None
+
+    def init(self):
+        config = updateConfig()
         if config.webui_config.debug:
             logger.info("Enable DEBUG-LEVEL log")
             logging.basicConfig(level=logging.DEBUG)

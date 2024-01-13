@@ -33,15 +33,15 @@ class Preprocess_text_config:
     """数据预处理配置"""
 
     def __init__(
-        self,
-        transcription_path: str,
-        cleaned_path: str,
-        train_path: str,
-        val_path: str,
-        config_path: str,
-        val_per_spk: int = 5,
-        max_val_total: int = 10000,
-        clean: bool = True,
+            self,
+            transcription_path: str,
+            cleaned_path: str,
+            train_path: str,
+            val_path: str,
+            config_path: str,
+            val_per_spk: int = 5,
+            max_val_total: int = 10000,
+            clean: bool = True,
     ):
         self.transcription_path: str = transcription_path  # 原始文本文件路径，文本格式应为{wav_path}|{speaker_name}|{language}|{text}。
         self.cleaned_path: str = cleaned_path  # 数据清洗后文本路径，可以不填。不填则将在原始文本目录生成
@@ -74,11 +74,11 @@ class Bert_gen_config:
     """bert_gen 配置"""
 
     def __init__(
-        self,
-        config_path: str,
-        num_processes: int = 2,
-        device: str = "cuda",
-        use_multi_device: bool = False,
+            self,
+            config_path: str,
+            num_processes: int = 2,
+            device: str = "cuda",
+            use_multi_device: bool = False,
     ):
         self.config_path = config_path
         self.num_processes = num_processes
@@ -96,10 +96,10 @@ class Emo_gen_config:
     """emo_gen 配置"""
 
     def __init__(
-        self,
-        config_path: str,
-        num_processes: int = 2,
-        device: str = "cuda",
+            self,
+            config_path: str,
+            num_processes: int = 2,
+            device: str = "cuda",
     ):
         self.config_path = config_path
         self.num_processes = num_processes
@@ -116,11 +116,11 @@ class Train_ms_config:
     """训练配置"""
 
     def __init__(
-        self,
-        config_path: str,
-        env: Dict[str, any],
-        base: Dict[str, any],
-        model: str,
+            self,
+            config_path: str,
+            env: Dict[str, any],
+            base: Dict[str, any],
+            model: str,
     ):
         self.env = env  # 需要加载的环境变量
         self.base = base  # 底模配置
@@ -139,14 +139,14 @@ class Webui_config:
     """webui 配置"""
 
     def __init__(
-        self,
-        device: str,
-        model: str,
-        config_path: str,
-        language_identification_library: str,
-        port: int = 7860,
-        share: bool = False,
-        debug: bool = False,
+            self,
+            device: str,
+            model: str,
+            config_path: str,
+            language_identification_library: str,
+            port: int = 7860,
+            share: bool = False,
+            debug: bool = False,
     ):
         self.device: str = device
         self.model: str = model  # 端口号
@@ -167,7 +167,7 @@ class Webui_config:
 
 class Server_config:
     def __init__(
-        self, models: List[Dict[str, any]], port: int = 5000, device: str = "cuda"
+            self, models: List[Dict[str, any]], port: int = 5000, device: str = "cuda"
     ):
         self.models: List[Dict[str, any]] = models  # 需要加载的所有模型的配置
         self.port: int = port  # 端口号
@@ -237,3 +237,12 @@ parser.add_argument("-y", "--yml_config", type=str, default="config.yml")
 args, _ = parser.parse_known_args()
 yml_config = args.yml_config
 config = Config(yml_config)
+
+def updateConfig():
+    parser = argparse.ArgumentParser()
+    # 为避免与以前的config.json起冲突，将其更名如下
+    parser.add_argument("-y", "--yml_config", type=str, default="config.yml")
+    args, _ = parser.parse_known_args()
+    yml_config = args.yml_config
+    config = Config(yml_config)
+    return config
